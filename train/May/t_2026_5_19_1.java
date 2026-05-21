@@ -18,7 +18,8 @@ public class t_2026_5_19_1
     //第三题
     public static void train_3(int n)
     {
-        for(int i=1;i*i<n;i++)
+
+        for(int i=1;;i++)
         {
             System.out.print((i*i)+" ");
         }
