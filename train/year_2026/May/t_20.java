@@ -7,7 +7,6 @@ public class t_20 {
 
     //    第三题
     public static void main(String[] args) {
-
         Scanner inp = new Scanner(System.in);
         System.out.println("请输入括号");
         String str=inp.next();
