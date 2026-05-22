@@ -1,8 +1,8 @@
-package train.May;
+package train.year_2026.May;
 
 import java.util.Scanner;
 
-public class t_2026_5_21_1 {
+public class t_21 {
     public static void main(String[] args) {
         Third();
     }
