@@ -7,6 +7,7 @@ public class t_19
     //第三题
     public static void main(String[] args)
     {
+
         System.out.println("请输入1-10^9内的整数");
         Scanner inp = new Scanner(System.in);
         int n = inp.nextInt();

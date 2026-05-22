@@ -9,6 +9,7 @@ public class t_21 {
 
     //第一题
     public static void First() {
+
         Scanner inp = new Scanner(System.in);
         int n = inp.nextInt();
         int[] arr = new int[n];
