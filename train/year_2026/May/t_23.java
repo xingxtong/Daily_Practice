@@ -1,6 +1,5 @@
 package train.year_2026.May;
 
-import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class t_23 {
