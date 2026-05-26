@@ -7,7 +7,6 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class t_26 {
-    static int id = 0;
 
     public static void main(String[] args) {
         third();
@@ -56,10 +55,10 @@ public class t_26 {
     }
 
     //第三题(模拟银行账户系统)
-    public static void third() {
+    public static void third(){
         ArrayList<BankAccount> acc = new ArrayList<>();
         Scanner inp = new Scanner(System.in);
-        int check = 0, account, amount,dex,leng;               //check接收输入，account是账号，amount是金额,dex是索引，leng是数组长度
+        int check, account, amount, dex, leng;               //check接收输入，account是账号，amount是金额,dex是索引，leng是数组长度
         String name;
         double balance;
         while (true) {
@@ -74,11 +73,11 @@ public class t_26 {
                 leng = acc.size();                                  //用户数量
                 dex = -1;                                           //符合的索引
                 if (check == 1) {                                   //开户
+                    System.out.println("输入姓名和初始存款");
                     name = inp.next();                              //接收用户名
                     balance = inp.nextDouble();                     //接收存款金额
                     acc.add(new BankAccount(name, balance));
-                }
-                else if (check == 2) {                              //存款
+                } else if (check == 2) {                              //存款
                     System.out.println("请输入账号和金额");
                     account = inp.nextInt();
                     amount = inp.nextInt();                         //获取账号，获取要存的金额
@@ -93,10 +92,10 @@ public class t_26 {
                     } else {
                         acc.get(dex).deposit(amount);
                     }
-                }
-                else if (check == 3) {                                  //取款
+                } else if (check == 3) {                                  //取款
                     System.out.println("请输入账号和金额");
-                    account = inp.nextInt();amount = inp.nextInt();                             //获取账号，获取要存的金额
+                    account = inp.nextInt();
+                    amount = inp.nextInt();                             //获取账号，获取要存的金额
                     for (int i = 0; i < leng; i++) {
                         if (acc.get(i).getAccountId() == account) {
                             dex = i;
@@ -108,10 +107,10 @@ public class t_26 {
                     } else {
                         acc.get(dex).withdraw(amount);
                     }
-                }
-                else if (check == 4) {                                  //查询账户(输入账号，显示显示姓名和余额)
-                    account = inp.nextInt();amount = inp.nextInt();                             //获取账号，获取要存的金额
-                    for(int i=0;i<leng;i++){
+                } else if (check == 4) {                                  //查询账户(输入账号，显示显示姓名和余额)
+                    System.out.println("请输入账号");
+                    account = inp.nextInt();
+                    for (int i = 0; i < leng; i++) {
                         if (acc.get(i).getAccountId() == account) {
                             dex = i;
                             break;
@@ -122,23 +121,24 @@ public class t_26 {
                     } else {
                         acc.get(dex).getInfo();
                     }
-                }
-                else if (check==5){
-                    if(leng==0){
+                } else if (check == 5) {
+                    if (leng == 0) {
                         System.out.println("没有任何用户");
                         continue;
                     }
-                    for(int i=0;i<leng;i++){
+                    for (int i = 0; i < leng; i++) {
                         System.out.print("1.");
                         acc.get(i).getInfo();
                     }
-                }
-                else if (check == 6) {
+                } else if (check == 6) {
                     break;
                 }
+                Thread.sleep(1000);
             } catch (InputMismatchException e) {
                 System.out.println("输入类型错误");
+            } catch (InterruptedException e) {
             }
+
         }
     }
 }
