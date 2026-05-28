@@ -42,7 +42,7 @@ public class Demo {
     public static void init() {
         //在此处完成代码
         //用两层循环将每个格子初始化为0(外面一层帮助判断谁胜利，所以从1开始，到18结束)
-        for (int i = 1; i < 18; i++) {
+        for (int i = 0; i < 19; i++) {
             for (int j = 1; j < 18; j++) {
                 board[i][j] = 0;
             }
@@ -64,6 +64,39 @@ public class Demo {
     */
     public static int isWin(int x, int y) {
         //在此处完成代码
+        //八个方向的向量(同一条线的向量相邻)
+        int[][] vec = {{-1, -1}, {1, 1},        //副对角线
+                {1, 0}, {-1, 0},                //垂直方向
+                {0, 1}, {0, -1},                //水平方向
+                {1, -1}, {-1, 1}};              //主对角线
+        //用来求和某一条线上有几个相同的棋子
+        int sum;
+        int x1, y1;
+        for (int i = 0; i < 8; i += 2) {
+            sum = 1;
+            //初始化x1和y1
+            x1 = x + vec[i][0];
+            y1 = y + vec[i][1];
+            //(x1,y1)位置和上一个位置相比
+            while (board[x1][y1] == board[x1 - vec[i][0]][y1 - vec[i][1]]) {
+                ++sum;
+                //更新x1和y1为下一个位置
+                x1 += vec[i][0];
+                y1 += vec[i][1];
+            }
+            x1 = x + vec[i + 1][0];
+            y1 = y + vec[i + 1][1];
+            //是上面循环的反方向
+            while (board[x1][y1] == board[x1 - vec[i + 1][0]][y1 - vec[i + 1][1]]) {
+                ++sum;
+                x1 += vec[i + 1][0];
+                y1 += vec[i + 1][1];
+            }
+
+            if (sum >= 5) {
+                return board[x][y];
+            }
+        }
         return 0;
     }
 
@@ -86,7 +119,7 @@ public class Demo {
         if ((x > 0 && x < 18) && (y > 0 && y < 18)) {
             //判断该位置(x,y)是否为0(空地)
             if (board[x][y] == 0) {
-                board[x][y] = flag % 2;
+                board[x][y] = (flag % 2) + 1;
                 return 1;
             }
         }
@@ -110,14 +143,19 @@ public class Demo {
     public static void menuView() {
         //在此处完成代码
         //接收用户的输入
-        int inp;
+        int inp=0;
         //主循环，先接收用户输入再运行指定函数
         while (true) {
             System.out.println("1.进入游戏");
             System.out.println("2.进入设置");
             System.out.println("3.退出游戏");
+            try{
+                inp = scan.nextInt();
+            } catch (InputMismatchException e){
+                System.out.println("输入类型错误");
+                scan.next();
+            }
 
-            inp = scan.nextInt();
             //根据用户输入去调用函数
             switch (inp) {
                 case 1:
@@ -251,7 +289,6 @@ public class Demo {
             //判断是否落子成功
             if (playerMove(x, y) == 1) {
                 System.out.println("落子成功");
-                ++flag;
                 win = isWin(x, y);
                 //如果win>0说明有人赢了，谁赢了不重要
                 if (win > 0) {
@@ -259,6 +296,7 @@ public class Demo {
                     winView();
                     return;
                 }
+                ++flag;
             } else {
                 System.out.println("落子失败,请重新输入");
             }
