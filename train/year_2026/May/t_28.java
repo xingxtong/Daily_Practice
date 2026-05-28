@@ -46,13 +46,13 @@ public class t_28 {
             return;
         }
         int rand1 = rand.nextInt(right - left + 1) + left;
-        int l1 = left;            //数组最左边的指针
-        int r1 = right;           //数组最右边的指针
-        int c;                  //用于交换的中间数组
-        int key = arr[rand1];
-        int id = left;            //用于移动的指针
-        //用两个指针合并(能取到right)
+        int l1 = left;              //数组最左边的指针
+        int r1 = right;             //数组最右边的指针
+        int c;                      //用于交换的中间数组
+        int key = arr[rand1];       //记录随机到的值
+        int id = left;              //用于移动的指针
         while (id <= r1) {
+
             if (arr[id] > key) {
                 c = arr[r1];
                 arr[r1] = arr[id];
